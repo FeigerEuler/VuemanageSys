@@ -7,6 +7,7 @@
 					<el-submenu index="2">
 						<template slot="title"><i class="el-icon-document"></i>流程管理</template>
 						<el-menu-item index="todoList">我的待办</el-menu-item>
+                        <el-menu-item index="doingList">办理中流程</el-menu-item>
 						<el-menu-item index="shopList">已办列表</el-menu-item>
 
 					</el-submenu>

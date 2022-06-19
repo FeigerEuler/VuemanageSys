@@ -216,6 +216,9 @@ export const deleteFood = food_id => fetch('/shopping/v2/food/' + food_id, {}, '
 
 export const getToDoList = data => fetch('/api/getToDoList', data,"POST");
 
+
+export const getDoingList = data => fetch('/api/getDoingList', data,"POST");
+
 /**
  * 获取用户数量
  */

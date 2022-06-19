@@ -23,8 +23,20 @@
                     <el-form-item label="营销费用">
                         <el-input v-model="formData.marketingFee"></el-input>
                     </el-form-item>
-        <el-form-item class="button_submit">
-                        <el-button type="primary" @click="submitForm('formData[0].id')">办结</el-button>
+
+                    <el-form-item label="是否办结">
+                        <el-select v-model="formData.status" placeholder="暂不办结">
+                            <el-option
+                                v-for="item in isDone"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value">
+                            </el-option>
+                        </el-select>
+                    </el-form-item>
+
+                    <el-form-item class="button_submit">
+                        <el-button type="primary" @click="submitForm('formData[0].id')">确认提交</el-button>
                     </el-form-item>
                 </el-form>
             </el-col>
@@ -37,6 +49,7 @@
 import headTop from '@/components/headTop'
 import {updateProcessInfo, searchByDepartment,addTechnicianInfo} from '@/api/getData'
 import {baseUrl, baseImgPath} from '@/config/env'
+import {addManagerInfo} from "../api/getData";
 
 export default {
     name: "manager",
@@ -48,12 +61,16 @@ export default {
                 id:'',
                 carNo:'',
                 marketingFee:'',
-                nextProcessor:''
+                nextProcessor:'',
+                carOwnerPhone:'',
+                carOwnerName:'',
+                status:'doing',
             },
             processInfo: {
                 id: '',
                 managerId: '',
-                nowProcessorId:''
+                status:''
+
             },
             rules: {
                 carNo: [
@@ -72,6 +89,13 @@ export default {
                 value: 1,
                 label: '是'
             },],
+            isDone: [{
+                value: 'done',
+                label: '办结'
+            }, {
+                value: 'doing',
+                label: '暂不办结'
+            },],
         }
     },
     components: {
@@ -88,25 +112,13 @@ export default {
 
             this.formData.id=data.id;
             this.formData.carNo=data.carNo;
+            this.formData.carOwnerName = data.carOwnerName;
+            this.formData.carOwnerPhone =  data.carOwnerPhone;
+            this.formData.marketingFee = data.marketingFee;
             this.detailVisible=true;
         },
         async initData() {
 
-            try {
-                const nextProcessors = await searchByDepartment({"department":"4"});
-                console.log(nextProcessors);
-                nextProcessors.forEach(item => {
-                    const addnew = {
-                        value: item.id,
-                        label: item.realName,
-                    }
-                    this.nextProcessor.push(addnew);
-                })
-                console.log(this.nextProcessor)
-
-            } catch (err) {
-                console.log(err);
-            }
         },
 
 
@@ -120,7 +132,7 @@ export default {
 
                 try {
                     this.processInfo.id = this.formData.id;
-                    this.processInfo.nowProcessorId = this.formData.nextProcessor;
+                    this.processInfo.status = this.formData.status;
                     this.processInfo.technicianId = sessionStorage.getItem("userId");
                     let result1 = await updateProcessInfo(this.processInfo);
                     if (result1.result === 'success') {
@@ -137,7 +149,7 @@ export default {
                 }
 
                 try {
-                    let result = await addTechnicianInfo(this.formData);
+                    let result = await addManagerInfo(this.formData);
                     if (result.result === 'success') {
                         this.$message({
                             type: 'success',

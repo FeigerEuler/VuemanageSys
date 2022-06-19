@@ -15,7 +15,7 @@ const treasurer = r => require.ensure([], () => r(require('@/page/treasurer')), 
 const manager = r => require.ensure([], () => r(require('@/page/manager')), 'manager');
 
 const todoList = r => require.ensure([], () => r(require('@/page/todoList')), 'todoList');
-
+const doingList = r => require.ensure([], () => r(require('@/page/doingList')), 'doingList');
 
 const routes = [
 	{
@@ -62,7 +62,11 @@ const routes = [
 			path: '/todoList',
 			component: todoList,
 			meta: ['数据管理', '用户列表'],
-		}]
+		},{
+            path: '/doingList',
+            component: doingList,
+            meta: ['数据管理', '办理中'],
+        }]
 	}
 ]
 
