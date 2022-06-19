@@ -12,6 +12,12 @@
                     <el-form-item label="车牌号" prop="carNo">
                         <el-input :disabled="true" v-model="formData.carNo"></el-input>
                     </el-form-item>
+                    <el-form-item label="车主姓名" >
+                        <el-input :disabled="true" v-model="formData.carOwnerName"></el-input>
+                    </el-form-item>
+                    <el-form-item label="车主手机号">
+                        <el-input :disabled="true" v-model="formData.carOwnerPhone"></el-input>
+                    </el-form-item>
 
 
                     <el-form-item label="营销费用">
