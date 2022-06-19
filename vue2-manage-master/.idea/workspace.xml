@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="5a5608e1-e1cc-4ac9-bcf0-da635256d8e9" name="Changes" comment="19:10">
+      <change beforePath="$PROJECT_DIR$/vue2-manage-master/src/config/fetch.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue2-manage-master/src/config/fetch.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="29pkbf2sTSo1J4TwqtuW2sCxyVS" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/vue2-manage-master/src/page" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="ts.external.directory.path" value="D:\Software\Dev\IDEA\IntelliJ IDEA 2021.2\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Study\project\vueManageSys\VuemanageSys\vue2-manage-master\vue2-manage-master\src\page" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5a5608e1-e1cc-4ac9-bcf0-da635256d8e9" name="Changes" comment="" />
+      <created>1653817488250</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1653817488250</updated>
+      <workItem from="1653817490367" duration="50000" />
+      <workItem from="1653817599629" duration="37000" />
+      <workItem from="1653817683435" duration="4987000" />
+      <workItem from="1654323680569" duration="25397000" />
+      <workItem from="1654427622461" duration="965000" />
+      <workItem from="1655618250171" duration="8574000" />
+      <workItem from="1655627981347" duration="9079000" />
+    </task>
+    <task id="LOCAL-00001" summary="ok">
+      <created>1654427911272</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1654427911272</updated>
+    </task>
+    <task id="LOCAL-00002" summary="ok">
+      <created>1655628045304</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1655628045304</updated>
+    </task>
+    <task id="LOCAL-00003" summary="ok">
+      <created>1655628079570</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1655628079570</updated>
+    </task>
+    <task id="LOCAL-00004" summary="ok">
+      <created>1655628133864</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1655628133864</updated>
+    </task>
+    <task id="LOCAL-00005" summary="ok">
+      <created>1655628169470</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1655628169470</updated>
+    </task>
+    <task id="LOCAL-00006" summary="ok">
+      <created>1655628189261</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1655628189261</updated>
+    </task>
+    <task id="LOCAL-00007" summary="ok">
+      <created>1655628199756</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1655628199756</updated>
+    </task>
+    <task id="LOCAL-00008" summary="ok">
+      <created>1655631232159</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1655631232159</updated>
+    </task>
+    <task id="LOCAL-00009" summary="19:10">
+      <created>1655637016502</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1655637016502</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="ok" />
+    <MESSAGE value="19:10" />
+    <option name="LAST_COMMIT_MESSAGE" value="19:10" />
+  </component>
+</project>
