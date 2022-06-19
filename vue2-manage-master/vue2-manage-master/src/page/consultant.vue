@@ -12,6 +12,12 @@
                     <el-form-item label="车牌号" prop="carNo">
                         <el-input :disabled="true" v-model="formData.carNo"></el-input>
                     </el-form-item>
+                    <el-form-item label="车主姓名" >
+                        <el-input :disabled="true" v-model="formData.carOwnerName"></el-input>
+                    </el-form-item>
+                    <el-form-item label="车主手机号">
+                        <el-input :disabled="true" v-model="formData.carOwnerPhone"></el-input>
+                    </el-form-item>
 
                     <el-form-item label="是否自店维护客户">
                         <el-select v-model="formData.isSubscriber" placeholder="请选择">
@@ -84,6 +90,18 @@
                         </el-select>
                     </el-form-item>
 
+                    <el-form-item label="下一步处理部门">
+                        <el-select v-model="nextDepartment" placeholder="下一步骤处理部门" >
+                            <el-option
+                                v-for="item in nextProcessDepartments"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value"
+                                @click.native="getNextProcessors(item.value)"
+                            >
+                            </el-option>
+                        </el-select>
+                    </el-form-item>
 
                     <el-form-item label="下一步办理人">
                         <el-select v-model="formData.nextProcessor" placeholder="请选择">
@@ -116,10 +134,13 @@ export default {
     data() {
         return {
             detailVisible:false,
-            city: {},
+            nextDepartment: '',
             formData: {
                 id:'',
                 carNo:'',
+                carOwnerName: '',
+                carOwnerPhone: '',
+
                 isSubscriber: 0, //店铺名称
                 isOnArrival: 0,
                 arrivalTime: '',
@@ -155,6 +176,17 @@ export default {
                 value: 1,
                 label: '是'
             },],
+            nextProcessDepartments: [{
+                value: 4,
+                label: '车间技师岗'
+            },{
+                value: 5,
+                label: '配件岗'
+            },{
+                value: 6,
+                label: '财务岗'
+            },],
+
         }
     },
     components: {
@@ -171,6 +203,8 @@ export default {
 
             this.formData.id=data.id;
             this.formData.carNo=data.carNo;
+            this.formData.carOwnerName=data.carOwnerName;
+            this.formData.carOwnerPhone = data.carOwnerPhone;
             this.detailVisible=true;
         },
         async initData() {
@@ -192,6 +226,19 @@ export default {
             }
         },
 
+        async getNextProcessors(department) {
+            const nextProcessors = await searchByDepartment({"department": department});
+            this.nextProcessor = [];
+            console.log(nextProcessors);
+            nextProcessors.forEach(item => {
+                const addnew = {
+                    value: item.id,
+                    label: item.realName,
+                }
+                this.nextProcessor.push(addnew);
+            })
+            console.log(this.nextProcessor)
+        },
 
 
         async submitForm(formName) {

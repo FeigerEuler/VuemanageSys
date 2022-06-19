@@ -12,8 +12,16 @@
                     <el-form-item label="车牌号" prop="carNo">
                         <el-input :disabled=true v-model="formData.carNo"></el-input>
                     </el-form-item>
+                    <el-form-item label="车主姓名" >
+                        <el-input :disabled="true" v-model="formData.carOwnerName"></el-input>
+                    </el-form-item>
+                    <el-form-item label="车主手机号">
+                        <el-input :disabled="true" v-model="formData.carOwnerPhone"></el-input>
+                    </el-form-item>
+
+
                     <el-form-item label="首次联系时间">
-                        <el-input v-model="formData.firstContactTime"></el-input>
+                        <el-button  type="primary" @click="getTime()" :disabled = 'getTimeFlag1' >确认已首次联系客户</el-button>
                     </el-form-item>
 
 
@@ -76,6 +84,20 @@
                         <el-input v-model="formData.remark"></el-input>
                     </el-form-item>
 
+
+                    <el-form-item label="下一步处理部门">
+                        <el-select v-model="nextDepartment" placeholder="下一步骤处理部门" >
+                            <el-option
+                                v-for="item in nextProcessDepartments"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value"
+                                @click.native="getNextProcessors(item.value)"
+                            >
+                            </el-option>
+                        </el-select>
+                    </el-form-item>
+
                     <el-form-item label="下一步办理人">
                         <el-select v-model="formData.nextProcessor" placeholder="请选择">
                             <el-option
@@ -104,6 +126,8 @@ import {baseUrl, baseImgPath} from '@/config/env'
 
 export default {
     name: "extend",
+    nextDepartment: '',
+    getTimeFlag1:false,
     data() {
         return {
             detailVisible:false,
@@ -111,6 +135,8 @@ export default {
             formData: {
                 id:'',
                 carNo:'',
+                carOwnerName: '',
+                carOwnerPhone: '',
                 firstContactTime: '',
                 isOnSite: '', //店铺名称
                 isValid: '',
@@ -148,6 +174,20 @@ export default {
                 value: 1,
                 label: '是'
             },],
+            nextProcessDepartments: [{
+                value: 3,
+                label: '服务顾问岗'
+            },{
+                value: 4,
+                label: '车间技师岗'
+            },{
+                value: 5,
+                label: '配件岗'
+            },{
+                value: 6,
+                label: '财务岗'
+            },],
+
         }
     },
     components: {
@@ -164,7 +204,14 @@ export default {
 
             this.formData.id=data.id;
             this.formData.carNo=data.carNo;
+            this.formData.carOwnerName=data.carOwnerName;
+            this.formData.carOwnerPhone = data.carOwnerPhone;
             this.detailVisible=true;
+        },
+        getTime(){
+            this.formData.firstContactTime = new Date().getTime();
+            this.getTimeFlag1=true;
+            //console.log(this.formData.firstContactTime)
         },
         async initData() {
 
@@ -206,6 +253,19 @@ export default {
             console.log(this.formData.latitude, this.formData.longitude)
         },
 
+        async getNextProcessors(department) {
+            const nextProcessors = await searchByDepartment({"department": department});
+            this.nextProcessor = [];
+            console.log(nextProcessors);
+            nextProcessors.forEach(item => {
+                const addnew = {
+                    value: item.id,
+                    label: item.realName,
+                }
+                this.nextProcessor.push(addnew);
+            })
+            console.log(this.nextProcessor)
+        },
 
         async submitForm(formName) {
 
