@@ -233,6 +233,8 @@ export default {
 
                     try {
                         this.addProcessInfo.carNo = this.formData.carNo;
+                        this.addProcessInfo.carOwnerName = this.formData.carOwnerName;
+                        this.addProcessInfo.carOwnerPhone = this.formData.carOwnerPhone;
                         this.addProcessInfo.nowProcessorId = this.formData.nextProcessor;
                         this.addProcessInfo.clueCollectionerId=sessionStorage.getItem("userId");
                         let result1 = await addProcessInfo(this.addProcessInfo);

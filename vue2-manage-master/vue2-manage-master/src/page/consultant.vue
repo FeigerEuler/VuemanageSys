@@ -40,7 +40,7 @@
                         </el-select>
                     </el-form-item>
                     <el-form-item label="车辆到店时间">
-                        <el-input v-model="formData.arrivalTime"></el-input>
+                        <el-button  type="primary" @click="getTime1()" :disabled = "getTimeFlag1" >确认已到店</el-button>
                     </el-form-item>
 
                     <el-form-item label="是否维修">
@@ -66,10 +66,10 @@
                         </el-select>
                     </el-form-item>
                     <el-form-item label="车辆交付时间" aria-placeholder="格式:yyyy-mm-dd">
-                        <el-input v-model="formData.deliverTime"></el-input>
+                        <el-button  type="primary" @click="getTime2()" :disabled = "getTimeFlag2" >确认已交付</el-button>
                     </el-form-item>
                     <el-form-item label="车辆完工时间" aria-placeholder="格式:yyyy-mm-dd">
-                        <el-input v-model="formData.accomplishmentTime"></el-input>
+                        <el-button  type="primary" @click="getTime13()" :disabled = "getTimeFlag3" >确认已完工</el-button>
                     </el-form-item>
                     <el-form-item label="车辆产值" aria-placeholder="格式:yyyy-mm-dd">
                         <el-input v-model="formData.outputValue"></el-input>
@@ -135,6 +135,10 @@ export default {
         return {
             detailVisible:false,
             nextDepartment: '',
+            getTimeFlag1:false,
+            getTimeFlag2:false,
+            getTimeFlag3:false,
+
             formData: {
                 id:'',
                 carNo:'',
@@ -207,6 +211,24 @@ export default {
             this.formData.carOwnerPhone = data.carOwnerPhone;
             this.detailVisible=true;
         },
+        getTime1(){
+            this.formData.arrivalTime = new Date().getTime();
+            this.getTimeFlag1=true;
+            //console.log(this.formData.firstContactTime)
+        },
+        getTime2(){
+            this.formData.deliverTime = new Date().getTime();
+            this.getTimeFlag2=true;
+            //console.log(this.formData.firstContactTime)
+        },
+        getTime3(){
+            this.formData.accomplishmentTime = new Date().getTime();
+            this.getTimeFlag3=true;
+            //console.log(this.formData.firstContactTime)
+        },
+
+
+
         async initData() {
 
             try {

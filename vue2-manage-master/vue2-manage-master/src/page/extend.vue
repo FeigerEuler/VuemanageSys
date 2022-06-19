@@ -21,7 +21,7 @@
 
 
                     <el-form-item label="首次联系时间">
-                        <el-button  type="primary" @click="getTime()" :disabled = 'getTimeFlag1' >确认已首次联系客户</el-button>
+                        <el-button  type="primary" @click="getTime()" :disabled = "getTimeFlag1" >确认已首次联系客户</el-button>
                     </el-form-item>
 
 
@@ -37,7 +37,7 @@
                     </el-form-item>
 
                     <el-form-item label="到达现场时间">
-                        <el-input v-model="formData.infoSource"></el-input>
+                        <el-button  type="primary" @click="getTime1()" :disabled = "getTimeFlag2" >确认已到达现场</el-button>
                     </el-form-item>
 
                     <el-form-item label="是否有效线索">
@@ -123,14 +123,17 @@
 import headTop from '@/components/headTop'
 import {updateProcessInfo, searchByDepartment} from '@/api/getData'
 import {baseUrl, baseImgPath} from '@/config/env'
+import {addExtensionInfo} from "../api/getData";
 
 export default {
     name: "extend",
     nextDepartment: '',
-    getTimeFlag1:false,
+
     data() {
         return {
             detailVisible:false,
+            getTimeFlag1:false,
+            getTimeFlag2:false,
             city: {},
             formData: {
                 id:'',
@@ -211,6 +214,11 @@ export default {
         getTime(){
             this.formData.firstContactTime = new Date().getTime();
             this.getTimeFlag1=true;
+            //console.log(this.formData.firstContactTime)
+        },
+        getTime1(){
+            this.formData.isOnSite = new Date().getTime();
+            this.getTimeFlag2=true;
             //console.log(this.formData.firstContactTime)
         },
         async initData() {
@@ -294,7 +302,7 @@ export default {
 
 
                 try {
-                    let result = await updateProcessInfo(this.formData);
+                    let result = await addExtensionInfo(this.formData);
                     if (result.result === 'success') {
                         this.$message({
                             type: 'success',

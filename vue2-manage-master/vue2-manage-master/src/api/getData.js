@@ -17,6 +17,7 @@ export const signout = () => fetch('/admin/signout');
  */
 export const updateProcessInfo = data => fetch('/api/updateProcessInfo', data, 'POST');
 
+export const addExtensionInfo = data => fetch('/api/addExtensionInfo', data, 'POST');
 /**
  * 获取用户信息
  */
