@@ -1,5 +1,5 @@
 <template>
-    <el-dialog title="配件岗" :visible.sync="detailVisible" width="35%">
+    <el-dialog title="财务岗" :visible.sync="detailVisible" width="35%">
 
     <div>
         <head-top></head-top>
@@ -12,29 +12,13 @@
                     <el-form-item label="车牌号" prop="carNo">
                         <el-input :disabled="true" v-model="formData.carNo"></el-input>
                     </el-form-item>
-                    <el-form-item label="车主姓名" >
-                        <el-input :disabled="true" v-model="formData.carOwnerName"></el-input>
-                    </el-form-item>
-                    <el-form-item label="车主手机号">
-                        <el-input :disabled="true" v-model="formData.carOwnerPhone"></el-input>
+
+
+                    <el-form-item label="车辆交付时间">
+                        <el-input v-model="formData.deliverTime"></el-input>
                     </el-form-item>
 
-                    <el-form-item label="车辆配件成本">
-                        <el-input v-model="formData.componentCost"></el-input>
-                    </el-form-item>
 
-                    <el-form-item label="下一步处理部门">
-                        <el-select v-model="nextDepartment" placeholder="下一步骤处理部门" >
-                            <el-option
-                                v-for="item in nextProcessDepartments"
-                                :key="item.value"
-                                :label="item.label"
-                                :value="item.value"
-                                @click.native="getNextProcessors(item.value)"
-                            >
-                            </el-option>
-                        </el-select>
-                    </el-form-item>
 
                     <el-form-item label="下一步办理人">
                         <el-select v-model="formData.nextProcessor" placeholder="请选择">
@@ -59,26 +43,24 @@
 
 <script>
 import headTop from '@/components/headTop'
-import {updateProcessInfo, searchByDepartment,addComponentInfo} from '@/api/getData'
+import {updateProcessInfo, searchByDepartment,addTreasurerInfo} from '@/api/getData'
 import {baseUrl, baseImgPath} from '@/config/env'
 
 export default {
-    name: "componenter",
+    name: "treasurer",
     data() {
         return {
             detailVisible:false,
-            nextDepartment: '',
+            city: {},
             formData: {
                 id:'',
                 carNo:'',
-                carOwnerName: '',
-                carOwnerPhone: '',
-                componentCost:'',
+                deliverTime:'',
                 nextProcessor:''
             },
             processInfo: {
                 id: '',
-                componenterId: '',
+                treasurerId: '',
                 nowProcessorId:''
             },
             rules: {
@@ -98,11 +80,6 @@ export default {
                 value: 1,
                 label: '是'
             },],
-
-            nextProcessDepartments: [{
-                value: 6,
-                label: '财务岗'
-            },],
         }
     },
     components: {
@@ -114,17 +91,17 @@ export default {
     methods: {
         init(data){
 
+
             console.log(data.carNo)
+
             this.formData.id=data.id;
             this.formData.carNo=data.carNo;
-            this.formData.carOwnerName=data.carOwnerName;
-            this.formData.carOwnerPhone = data.carOwnerPhone;
             this.detailVisible=true;
         },
         async initData() {
 
             try {
-                const nextProcessors = await searchByDepartment({"department":"6"});
+                const nextProcessors = await searchByDepartment({"department":"7"});
                 console.log(nextProcessors);
                 nextProcessors.forEach(item => {
                     const addnew = {
@@ -140,19 +117,6 @@ export default {
             }
         },
 
-        async getNextProcessors(department) {
-            const nextProcessors = await searchByDepartment({"department": department});
-            this.nextProcessor = [];
-            console.log(nextProcessors);
-            nextProcessors.forEach(item => {
-                const addnew = {
-                    value: item.id,
-                    label: item.realName,
-                }
-                this.nextProcessor.push(addnew);
-            })
-            console.log(this.nextProcessor)
-        },
 
 
         async submitForm(formName) {
@@ -165,7 +129,7 @@ export default {
                 try {
                     this.processInfo.id = this.formData.id;
                     this.processInfo.nowProcessorId = this.formData.nextProcessor;
-                    this.processInfo.componenterId = sessionStorage.getItem("userId");
+                    this.processInfo.treasurerId = sessionStorage.getItem("userId");
                     let result1 = await updateProcessInfo(this.processInfo);
                     if (result1.result === 'success') {
                         message: "交办成功!"
@@ -181,7 +145,7 @@ export default {
                 }
 
                 try {
-                    let result = await addComponentInfo(this.formData);
+                    let result = await addTreasurerInfo(this.formData);
                     if (result.result === 'success') {
                         this.$message({
                             type: 'success',

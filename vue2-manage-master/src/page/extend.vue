@@ -1,5 +1,5 @@
 <template>
-    <el-dialog title="财务岗" :visible.sync="detailVisible" width="35%">
+    <el-dialog title="外拓岗" :visible.sync="detailVisible" width="35%">
 
     <div>
         <head-top></head-top>
@@ -10,30 +10,70 @@
                         <el-input :disabled="true" v-model="formData.id"></el-input>
                     </el-form-item>
                     <el-form-item label="车牌号" prop="carNo">
-                        <el-input :disabled="true" v-model="formData.carNo"></el-input>
+                        <el-input :disabled=true v-model="formData.carNo"></el-input>
                     </el-form-item>
-                    <el-form-item label="车主姓名" >
-                        <el-input :disabled="true" v-model="formData.carOwnerName"></el-input>
-                    </el-form-item>
-                    <el-form-item label="车主手机号">
-                        <el-input :disabled="true" v-model="formData.carOwnerPhone"></el-input>
+                    <el-form-item label="首次联系时间">
+                        <el-input v-model="formData.firstContactTime"></el-input>
                     </el-form-item>
 
 
-                    <el-form-item label="车辆交付时间">
-                        <el-input v-model="formData.deliverTime"></el-input>
-                    </el-form-item>
-
-
-                    <el-form-item label="下一步办理人">
-                        <el-select v-model="formData.nextProcessor" placeholder="请选择">
+                    <el-form-item label="是否到达现场">
+                        <el-select v-model="formData.isOnSite" placeholder="请选择">
                             <el-option
-                                v-for="item in nextProcessor"
+                                v-for="item in validAttributes"
                                 :key="item.value"
                                 :label="item.label"
                                 :value="item.value">
                             </el-option>
                         </el-select>
+                    </el-form-item>
+
+                    <el-form-item label="到达现场时间">
+                        <el-input v-model="formData.infoSource"></el-input>
+                    </el-form-item>
+
+                    <el-form-item label="是否有效线索">
+                        <el-select v-model="formData.isValid" placeholder="请选择">
+                            <el-option
+                                v-for="item in validAttributes"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value">
+                            </el-option>
+                        </el-select>
+                    </el-form-item>
+
+
+                    <el-form-item label="是否首个到达现场">
+                        <el-select v-model="formData.isValidClue" placeholder="请选择">
+                            <el-option
+                                v-for="item in validAttributes"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value">
+                            </el-option>
+                        </el-select>
+                    </el-form-item>
+
+
+                    <el-form-item label="车辆是否到店?">
+                        <el-select v-model="formData.haveCarArrived" placeholder="请选择">
+                            <el-option
+                                v-for="item in validAttributes"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value">
+                            </el-option>
+                        </el-select>
+                    </el-form-item>
+
+                    <el-form-item label="营销费用" aria-placeholder="格式:yyyy-mm-dd">
+                        <el-input v-model="formData.marketingFee"></el-input>
+                    </el-form-item>
+
+
+                    <el-form-item label="备注:" aria-placeholder="格式:yyyy-mm-dd">
+                        <el-input v-model="formData.remark"></el-input>
                     </el-form-item>
 
                     <el-form-item label="下一步办理人">
@@ -59,26 +99,30 @@
 
 <script>
 import headTop from '@/components/headTop'
-import {updateProcessInfo, searchByDepartment,addTreasurerInfo} from '@/api/getData'
+import {updateProcessInfo, searchByDepartment} from '@/api/getData'
 import {baseUrl, baseImgPath} from '@/config/env'
 
 export default {
-    name: "treasurer",
+    name: "extend",
     data() {
         return {
             detailVisible:false,
-            nextDepartment: '',
+            city: {},
             formData: {
                 id:'',
                 carNo:'',
-                carOwnerName: '',
-                carOwnerPhone: '',
-                deliverTime:'',
-                nextProcessor:''
+                firstContactTime: '',
+                isOnSite: '', //店铺名称
+                isValid: '',
+                isValidClue: 0,
+                haveCarArrived: '',
+                marketingFee: 0,
+                nextProcessor: ''
+
             },
             processInfo: {
                 id: '',
-                treasurerId: '',
+                extenerId: '',
                 nowProcessorId:''
             },
             rules: {
@@ -87,21 +131,22 @@ export default {
                 ]
             },
 
+            activityValue: '满减优惠',
+            activities: [{
+                icon_name: '减',
+                name: '满减优惠',
+                description: '满30减5，满60减8',
+            }],
             baseUrl,
             baseImgPath,
             nextProcessor: [],
-
+            selectedCategory: ['快餐便当', '简餐'],
             validAttributes: [{
                 value: 0,
                 label: '否'
             }, {
                 value: 1,
                 label: '是'
-            },],
-
-            nextProcessDepartments: [{
-                value: 7,
-                label: '管理岗'
             },],
         }
     },
@@ -119,26 +164,46 @@ export default {
 
             this.formData.id=data.id;
             this.formData.carNo=data.carNo;
-            this.formData.carOwnerName=data.carOwnerName;
-            this.formData.carOwnerPhone = data.carOwnerPhone;
             this.detailVisible=true;
         },
         async initData() {
 
-        },
+            try {
+                const nextProcessors = await searchByDepartment({"department":"3"});
+                console.log(nextProcessors);
+                nextProcessors.forEach(item => {
+                    const addnew = {
+                        value: item.id,
+                        label: item.realName,
+                    }
+                    this.nextProcessor.push(addnew);
+                })
+                console.log(this.nextProcessor)
 
-        async getNextProcessors(department) {
-            const nextProcessors = await searchByDepartment({"department": department});
-            this.nextProcessor = [];
-            console.log(nextProcessors);
-            nextProcessors.forEach(item => {
-                const addnew = {
-                    value: item.id,
-                    label: item.realName,
+            } catch (err) {
+                console.log(err);
+            }
+        },
+        async querySearchAsync(queryString, cb) {
+            if (queryString) {
+                try {
+                    const cityList = await searchplace(this.city.id, queryString);
+                    if (cityList instanceof Array) {
+                        cityList.map(item => {
+                            item.value = item.address;
+                            return item;
+                        })
+                        cb(cityList)
+                    }
+                } catch (err) {
+                    console.log(err)
                 }
-                this.nextProcessor.push(addnew);
-            })
-            console.log(this.nextProcessor)
+            }
+        },
+        addressSelect(address) {
+            this.formData.latitude = address.latitude;
+            this.formData.longitude = address.longitude;
+            console.log(this.formData.latitude, this.formData.longitude)
         },
 
 
@@ -146,13 +211,13 @@ export default {
 
             if (1) {
                 Object.assign(this.formData, {activities: this.activities}, {
-                //    category: this.selectedCategory.join('/')
+                    category: this.selectedCategory.join('/')
                 })
 
                 try {
                     this.processInfo.id = this.formData.id;
                     this.processInfo.nowProcessorId = this.formData.nextProcessor;
-                    this.processInfo.treasurerId = sessionStorage.getItem("userId");
+                    this.processInfo.extenerId = sessionStorage.getItem("userId");
                     let result1 = await updateProcessInfo(this.processInfo);
                     if (result1.result === 'success') {
                         message: "交办成功!"
@@ -167,8 +232,9 @@ export default {
                     console.log(err)
                 }
 
+
                 try {
-                    let result = await addTreasurerInfo(this.formData);
+                    let result = await updateProcessInfo(this.formData);
                     if (result.result === 'success') {
                         this.$message({
                             type: 'success',
@@ -176,7 +242,14 @@ export default {
                         });
                         this.formData = {
                             carNo: '',
-                            id:''
+                            infoSource: '', //店铺名称
+                            acquireTime: '',
+                            isValidClue: 0,
+                            reportRegion: '',
+                            isSubscriber: 0,
+                            brand: '',
+                            model: '',
+                            remark: ''
                         };
                         this.detailVisible=false
                     } else {
