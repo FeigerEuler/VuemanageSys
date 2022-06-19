@@ -101,6 +101,7 @@ export const addComponentInfo = data => fetch('/api/addComponentInfo', data, 'PO
 export const addTreasurerInfo = data => fetch('/api/addTreasurerInfo', data, 'POST');
 
 export const addManagerInfo = data => fetch('/api/addManagerInfo', data, 'POST');
+
 /**
  * 添加商铺
  */
