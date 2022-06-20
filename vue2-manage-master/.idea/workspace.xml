@@ -1,34 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1feba4fb-1d92-4e63-b468-aca6d60fe2e0" name="Changes" comment="123">
+    <list default="true" id="1feba4fb-1d92-4e63-b468-aca6d60fe2e0" name="Changes" comment="ok123">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue2-manage-master/build/webpack.base.conf.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue2-manage-master/build/webpack.base.conf.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue2-manage-master/build/build.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue2-manage-master/build/build.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vue2-manage-master/manage/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/vue2-manage-master/manage/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue2-manage-master/manage/static/css/app.85873a69abe58e3fc37a13d571ef59e2.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue2-manage-master/manage/static/fonts/element-icons.b02bdc1.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue2-manage-master/manage/static/js/0.bf5b3fdc73dc4fb8ab94.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue2-manage-master/manage/static/js/1.bda9550f23fd25510197.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue2-manage-master/manage/static/js/10.57387267bef716929519.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue2-manage-master/manage/static/js/11.300b96fed4314094e320.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue2-manage-master/manage/static/js/12.ac5b060c8f21f36151a2.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue2-manage-master/manage/static/js/13.132a7d14859b5bc68d15.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue2-manage-master/manage/static/js/14.a19fea36326aad1bdcd6.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue2-manage-master/manage/static/js/15.ddbb92b02f054fe8ef2d.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue2-manage-master/manage/static/js/16.55263f6ff927b0cfc71e.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue2-manage-master/manage/static/js/17.1b9fc6be619a85015357.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue2-manage-master/manage/static/js/2.518f36a64b69026d4bb4.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue2-manage-master/manage/static/js/3.d301e718b0f953b0af8c.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue2-manage-master/manage/static/js/4.3564dfd5678892683105.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue2-manage-master/manage/static/js/5.cbe8637900251b39361e.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue2-manage-master/manage/static/js/6.7c52f98b23630d5077fc.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue2-manage-master/manage/static/js/7.9a290d962123cc865ea5.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue2-manage-master/manage/static/js/8.2298eb59473d255f9947.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue2-manage-master/manage/static/js/9.1048c6ca4f4cfab3f835.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue2-manage-master/manage/static/js/app.a1ae5290eef12afc5fbe.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue2-manage-master/manage/static/js/manifest.6c1dd29ed8e43f9137e5.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue2-manage-master/manage/static/js/vendor.3dc24904fb7d6dff77d7.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue2-manage-master/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/vue2-manage-master/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue2-manage-master/src/config/env.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue2-manage-master/src/config/env.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,7 +50,7 @@
       <workItem from="1654427622461" duration="965000" />
       <workItem from="1655618250171" duration="8574000" />
       <workItem from="1655627981347" duration="9079000" />
-      <workItem from="1655715786671" duration="1274000" />
+      <workItem from="1655715786671" duration="2728000" />
     </task>
     <task id="LOCAL-00001" summary="ok">
       <created>1654427911272</created>
@@ -145,7 +122,14 @@
       <option name="project" value="LOCAL" />
       <updated>1655639003295</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="ok123">
+      <created>1655717107890</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1655717107890</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -167,6 +151,7 @@
     <MESSAGE value="ok" />
     <MESSAGE value="19:10" />
     <MESSAGE value="123" />
-    <option name="LAST_COMMIT_MESSAGE" value="123" />
+    <MESSAGE value="ok123" />
+    <option name="LAST_COMMIT_MESSAGE" value="ok123" />
   </component>
 </project>
