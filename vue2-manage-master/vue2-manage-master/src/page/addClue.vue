@@ -7,12 +7,12 @@
                     <el-form-item label="车牌号" prop="carNo">
                         <el-input v-model="formData.carNo"></el-input>
                     </el-form-item>
-                    <el-form-item label="车主姓名" >
+                    <el-form-item label="车主姓名">
                         <el-input v-model="formData.carOwnerName"></el-input>
                     </el-form-item>
                     <el-form-item label="车主手机号">
-                    <el-input v-model="formData.carOwnerPhone"></el-input>
-                   </el-form-item>
+                        <el-input v-model="formData.carOwnerPhone"></el-input>
+                    </el-form-item>
 
                     <el-form-item label="信息来源">
                         <el-input v-model="formData.infoSource"></el-input>
@@ -31,7 +31,47 @@
                         </el-select>
                     </el-form-item>
                     <el-form-item label="客户报案区域" prop="description">
-                        <el-input v-model="formData.region"></el-input>
+                        <!--                        <el-input v-model="formData.region"></el-input>-->
+
+                        <el-select v-model="provinceName" placeholder="请选择省">
+                            <el-option
+                                v-for="item in provinces"
+                                :key="item.value"
+                                :label="item.value"
+                                :value="item.value"
+                                @click.native="getCityNames(item.value)"
+                            >
+                            </el-option>
+                        </el-select>
+                        <el-select v-model="cityName" placeholder="请选择市">
+                            <el-option
+                                v-for="item in cities"
+                                :key="item.value"
+                                :label="item.value"
+                                :value="item.value"
+                                @click.native="getDistrictNames(item.value)"
+                            >
+                            </el-option>
+                        </el-select>
+                        <el-select v-model="districtName" placeholder="请选择区">
+                            <el-option
+                                v-for="item in districts"
+                                :key="item.value"
+                                :label="item.value"
+                                :value="item.value"
+                                @click.native="getStreetNames(item.value)">
+                            </el-option>
+                        </el-select>
+                        <el-select v-model="streetName" placeholder="请选择街道" >
+                            <el-option
+                                v-for="item in streets"
+                                :key="item.value"
+                                :label="item.value"
+                                :value="item.value">
+                            </el-option>
+                        </el-select>
+
+
                     </el-form-item>
                     <el-form-item label="客户报案时间" prop="description">
                         <el-input v-model="formData.clientReprtTime"></el-input>
@@ -59,7 +99,7 @@
                     </el-form-item>
 
                     <el-form-item label="下一步处理部门">
-                        <el-select v-model="nextDepartment" placeholder="下一步骤处理部门" >
+                        <el-select v-model="nextDepartment" placeholder="下一步骤处理部门">
                             <el-option
                                 v-for="item in nextProcessDepartments"
                                 :key="item.value"
@@ -94,7 +134,7 @@
 
 <script>
 import headTop from '@/components/headTop'
-import {addProcessInfo, addClue, searchByDepartment, foodCategory} from '@/api/getData'
+import {addProcessInfo, addClue, searchByDepartment, getDistrictNames} from '@/api/getData'
 import {baseUrl, baseImgPath} from '@/config/env'
 
 export default {
@@ -102,7 +142,7 @@ export default {
         return {
             nextDepartment: '',
             formData: {
-                id:'',
+                id: '',
                 carNo: '',
                 carOwnerName: '',
                 carOwnerPhone: '',
@@ -117,10 +157,14 @@ export default {
                 nextProcessor: ''
 
             },
+            provinceName:'',
+            cityName:'',
+            districtName:'',
+            streetName:'',
             addProcessInfo: {
                 carNo: '',
                 clueCollectionerId: '',
-                nowProcessorId:''
+                nowProcessorId: ''
             },
             rules: {
                 carNo: [
@@ -139,19 +183,23 @@ export default {
                 value: 1,
                 label: '是'
             },],
-            nextProcessDepartments: [ {
+            provinces: [],
+            cities:[],
+            districts:[],
+            streets:[],
+            nextProcessDepartments: [{
                 value: 2,
                 label: '外拓岗'
-            },{
+            }, {
                 value: 3,
                 label: '服务顾问岗'
-            },{
+            }, {
                 value: 4,
                 label: '车间技师岗'
-            },{
+            }, {
                 value: 5,
                 label: '配件岗'
-            },{
+            }, {
                 value: 6,
                 label: '财务岗'
             },],
@@ -165,50 +213,81 @@ export default {
     },
     methods: {
         async initData() {
-
             try {
-
-                const categories = await foodCategory();
-                categories.forEach(item => {
-                    if (item.sub_categories.length) {
-                        const addnew = {
-                            value: item.name,
-                            label: item.name,
-                            children: []
-                        }
-                        item.sub_categories.forEach((subitem, index) => {
-                            if (index == 0) {
-                                return
-                            }
-                            addnew.children.push({
-                                value: subitem.name,
-                                label: subitem.name,
-                            })
-                        })
-                        this.categoryOptions.push(addnew)
-
+                const result = await getDistrictNames({"keyWord":"中国"});
+                this.provinces = [];
+                console.log(result.districtNames);
+                result.districtNames.forEach(item => {
+                    const addnew = {
+                        value: item.name,
+                        label: item.name,
                     }
+                    this.provinces.push(addnew);
                 })
+                console.log(this.provinces)
+
+            } catch (err) {
+                console.log(err);
+            }
+
+        },
+
+
+        async getCityNames(keyWord) {
+            try {
+                const result = await getDistrictNames({"keyWord": keyWord});
+                this.cities = [];
+
+                result.districtNames.forEach(item => {
+                    const addnew = {
+                        value: item.name,
+                        label: item.name,
+                    }
+                    this.cities.push(addnew);
+                })
+
             } catch (err) {
                 console.log(err);
             }
         },
-        async querySearchAsync(queryString, cb) {
-            if (queryString) {
-                try {
-                    const cityList = await searchplace(this.city.id, queryString);
-                    if (cityList instanceof Array) {
-                        cityList.map(item => {
-                            item.value = item.address;
-                            return item;
-                        })
-                        cb(cityList)
+
+        async getDistrictNames(keyWord) {
+            try {
+                const result = await getDistrictNames({"keyWord": keyWord});
+                this.districts = [];
+
+                result.districtNames.forEach(item => {
+                    const addnew = {
+                        value: item.name,
+                        label: item.name,
                     }
-                } catch (err) {
-                    console.log(err)
-                }
+                    this.districts.push(addnew);
+                })
+
+            } catch (err) {
+                console.log(err);
             }
         },
+
+        async getStreetNames(keyWord) {
+            try {
+                const result = await getDistrictNames({"keyWord": keyWord});
+                this.streets = [];
+
+                result.districtNames.forEach(item => {
+                    const addnew = {
+                        value: item.name,
+                        label: item.name,
+                    }
+                    this.streets.push(addnew);
+                })
+
+            } catch (err) {
+                console.log(err);
+            }
+
+        },
+
         async getNextProcessors(department) {
             const nextProcessors = await searchByDepartment({"department": department});
             this.nextProcessor = [];
@@ -225,10 +304,11 @@ export default {
 
 
         submitForm(formName) {
+            this.formData.reportRegion = this.provinceName+this.cityName+this.districtName+this.streetName;
             this.$refs[formName].validate(async (valid) => {
                 if (valid) {
                     Object.assign(this.formData, {activities: this.activities}, {
-                       // category: this.selectedCategory.join('/')
+                        // category: this.selectedCategory.join('/')
                     })
 
                     try {
@@ -236,18 +316,18 @@ export default {
                         this.addProcessInfo.carOwnerName = this.formData.carOwnerName;
                         this.addProcessInfo.carOwnerPhone = this.formData.carOwnerPhone;
                         this.addProcessInfo.nowProcessorId = this.formData.nextProcessor;
-                        this.addProcessInfo.clueCollectionerId=sessionStorage.getItem("userId");
+                        this.addProcessInfo.clueCollectionerId = sessionStorage.getItem("userId");
                         let result1 = await addProcessInfo(this.addProcessInfo);
-                        if(result1.result === 'success'){
+                        if (result1.result === 'success') {
                             this.formData.id = result1.processInfo.id;
-                        }else{
+                        } else {
                             this.$message({
                                 type: 'error',
                                 message: "请稍后再试!"
                             });
                         }
 
-                    }catch (err) {
+                    } catch (err) {
                         console.log(err)
                     }
 

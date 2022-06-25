@@ -28,7 +28,7 @@ export const getAdminInfo = () => fetch('/admin/info');
  * api请求量
  */
 
-export const apiCount = date => fetch('/statis/api/' + date + '/count');
+export const getDistrictNames = data => fetch('/api/getDistrictsNames' , data ,'POST');
 
 /**
  * 所有api请求量
