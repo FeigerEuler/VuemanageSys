@@ -21,9 +21,13 @@ export const addExtensionInfo = data => fetch('/api/addExtensionInfo', data, 'PO
 /**
  * 获取用户信息
  */
+export const addMembers = data => fetch('/mhh/addMembers', data, 'POST');
+//export const getAdminInfo = () => fetch('/admin/info');
 
-export const getAdminInfo = () => fetch('/admin/info');
 
+export const queryMemInfoByUserName = data => fetch('/mhh/queryMemInfoByUserName', data, 'POST');
+export const updateMemberInfo = data => fetch('/mhh/updateMemInfoById', data, 'POST');
+export const queryMemInfoById = data => fetch('/mhh/queryMemInfoById', data, 'POST');
 /**
  * api请求量
  */

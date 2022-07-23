@@ -16,7 +16,8 @@
 						<el-menu-item index="addClue">录入线索</el-menu-item>
 
 
-<!--                        <el-menu-item index="extend">外拓</el-menu-item>-->
+                        <el-menu-item index="addMembers">新增员工</el-menu-item>
+                        <el-menu-item index="updateMemberinfo">更新员工信息</el-menu-item>
 <!--                        <el-menu-item index="consultant">顾问岗</el-menu-item>-->
 <!--                        <el-menu-item index="technician">车间技师岗</el-menu-item>-->
 
