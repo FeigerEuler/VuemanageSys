@@ -25,13 +25,15 @@
                     </el-form-item>
 
 
-                    <el-form-item label="下一步办理人">
-                        <el-select v-model="formData.nextProcessor" placeholder="请选择">
+                    <el-form-item label="下一步处理部门">
+                        <el-select v-model="nextDepartment" placeholder="下一步骤处理部门" >
                             <el-option
-                                v-for="item in nextProcessor"
+                                v-for="item in nextProcessDepartments"
                                 :key="item.value"
                                 :label="item.label"
-                                :value="item.value">
+                                :value="item.value"
+                                @click.native="getNextProcessors(item.value)"
+                            >
                             </el-option>
                         </el-select>
                     </el-form-item>
