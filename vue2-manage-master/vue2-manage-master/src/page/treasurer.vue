@@ -124,7 +124,21 @@ export default {
             this.detailVisible=true;
         },
         async initData() {
+            try {
+                const nextProcessors = await searchByDepartment({"department":"7"});
+                console.log(nextProcessors);
+                nextProcessors.forEach(item => {
+                    const addnew = {
+                        value: item.id,
+                        label: item.realName,
+                    }
+                    this.nextProcessor.push(addnew);
+                })
+                console.log(this.nextProcessor)
 
+            } catch (err) {
+                console.log(err);
+            }
         },
 
         async getNextProcessors(department) {

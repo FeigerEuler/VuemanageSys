@@ -69,7 +69,7 @@
                         <el-button  type="primary" @click="getTime2()" :disabled = "getTimeFlag2" >确认已交付</el-button>
                     </el-form-item>
                     <el-form-item label="车辆完工时间" aria-placeholder="格式:yyyy-mm-dd">
-                        <el-button  type="primary" @click="getTime13()" :disabled = "getTimeFlag3" >确认已完工</el-button>
+                        <el-button  type="primary" @click="getTime3()" :disabled = "getTimeFlag3" >确认已完工</el-button>
                     </el-form-item>
                     <el-form-item label="车辆产值" aria-placeholder="格式:yyyy-mm-dd">
                         <el-input v-model="formData.outputValue"></el-input>
