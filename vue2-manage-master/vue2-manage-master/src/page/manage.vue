@@ -12,12 +12,13 @@
 
 					</el-submenu>
 					<el-submenu index="3">
-						<template slot="title"><i class="el-icon-plus"></i>录入数据</template>
+						<template slot="title"><i class="el-icon-plus"></i>数据管理</template>
 						<el-menu-item index="addClue">录入线索</el-menu-item>
 
 
                         <el-menu-item index="addMembers">新增员工</el-menu-item>
                         <el-menu-item index="updateMemberinfo">更新员工信息</el-menu-item>
+                        <el-menu-item index="dataStatistics">报表导出</el-menu-item>
 <!--                        <el-menu-item index="consultant">顾问岗</el-menu-item>-->
 <!--                        <el-menu-item index="technician">车间技师岗</el-menu-item>-->
 

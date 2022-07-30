@@ -2,7 +2,7 @@ import { baseUrl } from './env'
 
 export default async(url = '', data = {}, type = 'GET', method = 'fetch') => {
 	type = type.toUpperCase();
-    url = "http://mhf418.work:8088"+url;
+    url = "http://localhost:8088"+url;
     console.log(url)
 	if (type == 'GET') {
 		let dataStr = ''; //数据拼接字符串

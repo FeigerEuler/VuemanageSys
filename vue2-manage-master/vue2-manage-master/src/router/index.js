@@ -18,6 +18,7 @@ const todoList = r => require.ensure([], () => r(require('@/page/todoList')), 't
 const doingList = r => require.ensure([], () => r(require('@/page/doingList')), 'doingList');
 const addMembers = r => require.ensure([], () => r(require('@/page/addMembers')), 'addMembers');
 const updateMemberInfo= r => require.ensure([], () => r(require('@/page/updateMemberInfo')), 'updateMemberInfo');
+const dataStatistics= r => require.ensure([], () => r(require('@/page/dataStatistics')), 'dataStatistics');
 const routes = [
 	{
 		path: '/',
@@ -75,6 +76,10 @@ const routes = [
             path: '/updateMemberInfo',
             component: updateMemberInfo,
             meta: ['数据管理', '更新信息'],
+        },{
+            path: '/dataStatistics',
+            component: dataStatistics,
+            meta: ['数据管理', '数据统计'],
         }]
 	}
 ]
